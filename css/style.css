@@ -1,13 +1,48 @@
-/* body {
-  background-color: teal;
-} */
+body {
+  /* background-color: rgb(37, 37, 37);
+  color: white; */
+  background-color: lemonchiffon;
+}
 
-app-element {
+/* app-element {
   display: block;
   background: steelblue;
   width: 200px;
   height: 200px;
+} */
+
+/* *******************
+   *** Hero Stile ****
+   *******************
+*/
+.hero__title {
+  font-size: 4.4rem;
 }
+.hero__subtitle {
+  font-size: 3.3rem;
+}
+.hero__paragraph {
+  font-size: 1.5rem;
+}
+.hero__btn {
+  border-radius: 16px;
+  background-image: linear-gradient(
+    to right,
+    #fe9605,
+    #ff7f11,
+    #ff661e,
+    #ff482b,
+    #fc1e37
+  );
+  border-color: #ff9800;
+  padding: 0.8rem 2.5rem 0.8rem 2.5rem;
+  font-weight: bold;
+  text-transform: uppercase;
+}
+
+/*************************
+   *** CARD CONTAINER ****
+   ***********************/
 
 .card-container {
   min-width: 290px;
