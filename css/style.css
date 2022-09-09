@@ -1,0 +1,27 @@
+/* body {
+  background-color: teal;
+} */
+
+app-element {
+  display: block;
+  background: steelblue;
+  width: 200px;
+  height: 200px;
+}
+
+.card-container {
+  min-width: 290px;
+  max-width: 300px;
+  /* padding: 0; */
+}
+
+.card-container__info {
+  --bs-card-border-radius: 22px;
+  /* border-radius: 22px; */
+}
+/* max-width: 315px; */
+
+.card-container__img {
+  border-radius: 38px;
+  padding: 1rem;
+}
