@@ -11,10 +11,9 @@ body {
   height: 200px;
 } */
 
-/* *******************
-   *** Hero Stile ****
-   *******************
-*/
+/* ----------------------- */
+/* -  Hero Stile           */
+/* ----------------------- */
 .hero__title {
   font-size: 4.4rem;
 }
@@ -40,13 +39,39 @@ body {
   text-transform: uppercase;
 }
 
-/*************************
-   *** CARD CONTAINER ****
-   ***********************/
+.btn {
+  border-radius: 16px;
+  background-image: linear-gradient(
+    to right,
+    #fe9605,
+    #ff7f11,
+    #ff661e,
+    #ff482b,
+    #fc1e37
+  );
+  border-color: #ff9800;
+  font-weight: bold;
+}
+
+/* ----------------------- */
+/* -  CARD CATEGORY        */
+/* ----------------------- */
+
+.card-section {
+  --bs-card-border-radius: 22px;
+  min-width: 360px;
+  max-width: 390px;
+}
+
+/* ----------------------- */
+/* -  CARD PRODUCT         */
+/* ----------------------- */
 
 .card-container {
-  min-width: 290px;
-  max-width: 300px;
+  /* min-width: 290px;
+  max-width: 300px; */
+  min-width: 320px;
+  max-width: 340px;
   /* padding: 0; */
 }
 
@@ -59,4 +84,14 @@ body {
 .card-container__img {
   border-radius: 38px;
   padding: 1rem;
+}
+
+/* @media (min-width: 765px) { */
+@media (max-width: 765px) {
+  .card-section {
+    /* min-width: 320px;
+    max-width: 340px; */
+    min-width: 300px;
+    max-width: 315px;
+  }
 }
