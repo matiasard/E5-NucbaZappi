@@ -1,7 +1,25 @@
+:root{
+  --background_color: #131415;
+  --background_color-card: #252525;
+  --color_naranja: #FFA400;
+  --color_rojo: #FC2933;
+  --color_letras: #FFFFFF;
+  --color_gradiente: background-image: linear-gradient(
+    to right,
+    #fe9605,
+    #ff7f11,
+    #ff661e,
+    #ff482b,
+    #fc1e37
+  );
+}
+
 body {
   /* background-color: rgb(37, 37, 37);
   color: white; */
-  background-color: lemonchiffon;
+  /* background-color: lemonchiffon; */
+  background-color: var(--background_color);
+  color: var(--color_letras);
 }
 
 /* app-element {
@@ -54,13 +72,73 @@ body {
 }
 
 /* ----------------------- */
+/* -  CARD RECOMENDACIONES */
+/* ----------------------- */
+.card-recomendacion-container {
+  column-gap: 1px;
+}
+
+.card-recomendacion {
+  --bs-card-border-radius: 22px;
+  min-width: 380px;
+  max-width: 390px;
+
+  background-color: var(--background_color-card);
+  color: var(--color_letras);
+  box-shadow:
+  0.4px 0.1px 2.8px rgba(0, 0, 0, 0.078),
+  1px 0.2px 7px rgba(0, 0, 0, 0.111),
+  1.9px 0.4px 14.4px rgba(0, 0, 0, 0.139),
+  4px 0.7px 29.6px rgba(0, 0, 0, 0.172),
+  11px 2px 81px rgba(0, 0, 0, 0.25)
+;  
+}
+
+/* ----------------------- */
 /* -  CARD CATEGORY        */
 /* ----------------------- */
+.category-container {
+  /* min-width: 300px;
+  max-width: 315px; */
+  /* margin-inline: auto; */
+}
+.category-container img{
+  height: 83px;
+  width: 83px;
+}
+.card-category__container {
+  width: 180px;
+  height: 180px;
+}
+.card-category__body {
+  display: flex;
+  align-items: center;
+  border-radius: 16px;;
+  background-color: var(--background_color-card);
+  color: var(--color_letras);
+  padding-top: 1.2rem;
+  padding-bottom: 1.2rem;
+  box-shadow:
+  0.4px 0.1px 2.8px rgba(0, 0, 0, 0.078),
+  1px 0.2px 7px rgba(0, 0, 0, 0.111),
+  1.9px 0.4px 14.4px rgba(0, 0, 0, 0.139),
+  4px 0.7px 29.6px rgba(0, 0, 0, 0.172),
+  11px 2px 81px rgba(0, 0, 0, 0.25)
+;
 
-.card-section {
-  --bs-card-border-radius: 22px;
-  min-width: 360px;
-  max-width: 390px;
+}
+.card-category__body hr {
+  margin: 0;
+  height: 4px;
+  width: 24px;
+  margin-top: 15px;
+  /* border-radius: 15px; */
+  background: linear-gradient(98.81deg, #FFA100 -0.82%, #FF005C 101.53%);
+  box-shadow: 0px 0px 50px rgb(1 2 7 / 50%);
+  border-radius: 15px;
+  border: none;
+  margin-inline: auto;
+  
 }
 
 /* ----------------------- */
@@ -73,11 +151,13 @@ body {
   min-width: 320px;
   max-width: 340px;
   /* padding: 0; */
+  color: var(--color_letras)
 }
 
 .card-container__info {
   --bs-card-border-radius: 22px;
   /* border-radius: 22px; */
+  background-color: var(--background_color-card);
 }
 /* max-width: 315px; */
 
@@ -88,7 +168,7 @@ body {
 
 /* @media (min-width: 765px) { */
 @media (max-width: 765px) {
-  .card-section {
+  .card-recomendacion {
     /* min-width: 320px;
     max-width: 340px; */
     min-width: 300px;
