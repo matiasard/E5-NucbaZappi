@@ -1,6 +1,6 @@
 'use strict';
 import { pizzaList } from '/js/bd.js';
-import './shoppingCart.js';
+import { cart as cartShop, addToCart, totalQuantity } from './shoppingCart.js';
 
 // console.log(pizzaList);
 
@@ -23,6 +23,13 @@ const init = () => {
 
   //* Display Cards
   renderCards(cart);
+
+  //* Shopping Cart TEST 👇
+  addToCart('Pan', 4);
+  addToCart('Carne', 5);
+  addToCart('Queso', 2);
+  console.log(cartShop);
+  console.log(`Cantidad Total de Productos: ${totalQuantity(cartShop)}`);
 };
 
 init();
@@ -32,7 +39,7 @@ init();
 function renderCards(array) {
   for (const element of array) {
     let templateCard = `
-    <div class="col-9 mx-auto col-sm-6 col-md-4 col-lg-3 card-container">
+    <div class="col-12 mx-auto col-sm-6 col-md-4 col-lg-3 card-container">
       <div class="card h-100 card-container__info">
         <img src="${element.img}" class="card-img-top card-container__img" alt="${element.nombre}" height="165">
         <div class="card-body">
@@ -40,7 +47,7 @@ function renderCards(array) {
           <p class="card-text">This is a longer card .</p>
           <div class="row">
               <div class="col-6 col-md-6 h4 my-auto d-flex justify-content-start">
-                <strong>$350</strong>
+                <strong>$${element.precio}</strong>
               </div>
               <div class="col-6 col-md-6 d-flex justify-content-end">
                 <button class="btn btn-primary">Agregar</button>
