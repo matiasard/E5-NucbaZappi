@@ -1,7 +1,14 @@
+let dinamicId = 0;
+
+function idGenerator() {
+  return dinamicId++;
+}
+
 export const pizzaList = [
   {
-    id: 2,
+    id: idGenerator(),
     nombre: 'Pizza Hawaiana',
+    descripcion: 'description',
     ingredientes: [
       'Salsa de tomate',
       'rodajas de piña',
@@ -14,8 +21,9 @@ export const pizzaList = [
     img: 'https://lechatmagazine.com/wp-content/uploads/2021/11/como-hacer-pizza-hawaiana-receta-PORTADA-le-chat-magazine.jpg',
   },
   {
-    id: 4,
+    id: idGenerator(),
     nombre: 'Pizza de Primavera',
+    descripcion: 'description',
     ingredientes: [
       'Salsa de tomate',
       'Muzzarella',
@@ -28,8 +36,9 @@ export const pizzaList = [
     img: 'https://pizzasargentinas.com/wp-content/uploads/2020/10/pizzza-de-primavera-816x459.jpg',
   },
   {
-    id: 5,
+    id: idGenerator(),
     nombre: 'Pizza de Panceta',
+    descripcion: 'description',
     ingredientes: [
       'Salsa de tomate',
       'Muzzarella',
@@ -41,8 +50,9 @@ export const pizzaList = [
     img: 'https://www.solopizzas.info/wp-content/uploads/2021/01/White-and-Yellow-Simple-Fireworks-Photo-New-Year-Card-12-2.jpg',
   },
   {
-    id: 7,
+    id: idGenerator(),
     nombre: 'Pizza con Huevo Frito',
+    descripcion: 'description',
     ingredientes: [
       'Salsa de tomate',
       'Muzzarella',
@@ -55,8 +65,9 @@ export const pizzaList = [
     img: 'https://img.cocinarico.es/2021-07/pizza-con-huevos-1.webp',
   },
   {
-    id: 8,
+    id: idGenerator(),
     nombre: 'Pizza de Roquefort',
+    descripcion: 'description',
     ingredientes: [
       'Salsa de tomate',
       'Muzzarella',
@@ -68,8 +79,9 @@ export const pizzaList = [
     img: 'https://pizzasargentinas.com/wp-content/uploads/2020/11/Pizza-de-roquefort-1024x905-1.jpg',
   },
   {
-    id: 9,
+    id: idGenerator(),
     nombre: 'Pizza de Calabresa',
+    descripcion: 'description',
     ingredientes: [
       'Salsa de tomate',
       'Muzzarella',
