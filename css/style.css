@@ -172,6 +172,10 @@ body {
   margin-inline: auto;
 }
 
+.card-category__container .card-title {
+  --bs-card-title-spacer-y: 0rem;
+}
+
 .card-container__body-price {
   font-size: 1.3rem;
   letter-spacing: .5px;

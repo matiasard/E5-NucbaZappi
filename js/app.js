@@ -47,18 +47,18 @@ init();
 
 //*------------_______ ✨ FUNCIONES ✨ _______------------
 
-function renderCards(array) {
-  for (const element of array) {
+function renderCards(foods) {
+  for (const food of foods) {
     let templateCard = `
     <div class="col-12 mx-auto col-sm-6 col-md-4 col-lg-3 card-container">
       <div class="card h-100 card-container__info">
-        <img src="${element.img}" class="card-img-top card-container__img" alt="${element.nombre}" height="165">
+        <img src="${food.img}" class="card-img-top card-container__img" alt="${food.nombre}" height="165">
         <div class="card-body">
-          <h5 class="card-title fw-normal">${element.nombre}</h5>
-          <p class="card-text text-muted">This is a longer card.</p>
+          <h5 class="card-title fw-normal">${food.nombre}</h5>
+          <p class="card-text text-muted">${food.descripcion}.</p>
           <div class="row">
               <div class="col-6 col-md-6 my-auto d-flex justify-content-start">
-                <span class="card-container__body-price">$${element.precio}</span>
+                <span class="card-container__body-price">$${food.precio}</span>
               </div>
               <div class="col-6 col-md-6 d-flex justify-content-end">
                 <button class="btn btn-primary card-container__btn">Agregar</button>
