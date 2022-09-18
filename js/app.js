@@ -43,14 +43,14 @@ function renderCards(array) {
       <div class="card h-100 card-container__info">
         <img src="${element.img}" class="card-img-top card-container__img" alt="${element.nombre}" height="165">
         <div class="card-body">
-          <h5 class="card-title">${element.nombre}</h5>
-          <p class="card-text">This is a longer card .</p>
+          <h5 class="card-title fw-normal">${element.nombre}</h5>
+          <p class="card-text text-muted">This is a longer card.</p>
           <div class="row">
-              <div class="col-6 col-md-6 h4 my-auto d-flex justify-content-start">
-                <strong>$${element.precio}</strong>
+              <div class="col-6 col-md-6 my-auto d-flex justify-content-start">
+                <span class="card-container__body-price">$${element.precio}</span>
               </div>
               <div class="col-6 col-md-6 d-flex justify-content-end">
-                <button class="btn btn-primary">Agregar</button>
+                <button class="btn btn-primary card-container__btn">Agregar</button>
               </div>
             </div>
         </div>

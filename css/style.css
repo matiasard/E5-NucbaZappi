@@ -22,6 +22,26 @@ body {
   color: var(--color_letras);
 }
 
+/* ----------------------- */
+/* -  UTILITY              */
+/* ----------------------- */
+.btn {
+  border-radius: 16px;
+  background-image: linear-gradient(
+    to right,
+    #fe9605,
+    #ff7f11,
+    #ff661e,
+    #ff482b,
+    #fc1e37
+  );
+  /* border-color: #ff9800; */
+  font-weight: bold;
+  padding-top: 5px;
+  padding-bottom: 5px;
+  border: none;
+}
+
 /* app-element {
   display: block;
   background: steelblue;
@@ -57,19 +77,6 @@ body {
   text-transform: uppercase;
 }
 
-.btn {
-  border-radius: 16px;
-  background-image: linear-gradient(
-    to right,
-    #fe9605,
-    #ff7f11,
-    #ff661e,
-    #ff482b,
-    #fc1e37
-  );
-  border-color: #ff9800;
-  font-weight: bold;
-}
 
 /* ----------------------- */
 /* -  CARD RECOMENDACIONES */
@@ -92,6 +99,21 @@ body {
   4px 0.7px 29.6px rgba(0, 0, 0, 0.172),
   11px 2px 81px rgba(0, 0, 0, 0.25)
 ;  
+}
+
+.card-recomendacion__title {
+  font-weight: 400;
+  font-size: 1.2rem;;
+}
+
+.card-recomendacion__price {
+  /* letter-spacing: .5px; */
+  font-size: 1.3rem;
+  display: inline-block;
+  background: linear-gradient(90deg, var(--color_naranja) 0%, var(--color_rojo) 100%);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  font-weight: 800;
 }
 
 /* ----------------------- */
@@ -125,8 +147,8 @@ body {
   4px 0.7px 29.6px rgba(0, 0, 0, 0.172),
   11px 2px 81px rgba(0, 0, 0, 0.25)
 ;
-
 }
+
 .card-category__body hr {
   margin: 0;
   height: 4px;
@@ -138,7 +160,15 @@ body {
   border-radius: 15px;
   border: none;
   margin-inline: auto;
-  
+}
+
+.card-container__body-price {
+  font-size: 1.3rem;
+  letter-spacing: .5px;
+  background: linear-gradient(90deg, var(--color_naranja) 0%, var(--color_rojo) 100%);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  font-weight: 800;
 }
 
 /* ----------------------- */
@@ -146,31 +176,30 @@ body {
 /* ----------------------- */
 
 .card-container {
-  /* min-width: 290px;
-  max-width: 300px; */
   min-width: 320px;
   max-width: 340px;
-  /* padding: 0; */
   color: var(--color_letras)
 }
 
 .card-container__info {
   --bs-card-border-radius: 22px;
-  /* border-radius: 22px; */
   background-color: var(--background_color-card);
 }
-/* max-width: 315px; */
 
 .card-container__img {
   border-radius: 38px;
   padding: 1rem;
 }
 
-/* @media (min-width: 765px) { */
+.card-container__btn {
+  padding-inline: 20px;;
+}
+
+/* ----------------------- */
+/* -  MEDIA QUERY          */
+/* ----------------------- */
 @media (max-width: 765px) {
   .card-recomendacion {
-    /* min-width: 320px;
-    max-width: 340px; */
     min-width: 300px;
     max-width: 315px;
   }
