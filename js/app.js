@@ -1,15 +1,22 @@
 'use strict';
 import { pizzaList } from '/js/bd.js';
 import { cart as cartShop, addToCart, totalQuantity } from './shoppingCart.js';
+import { randomRecommendation } from './script.js';
 
 // console.log(pizzaList);
 
 //*------------_______ ✨ DATOS ✨ _______------------
 let cardContainer = document.querySelector('#card-container');
+let cardRecomendacion = document.querySelector('#card-recomendacion-container');
 
 //*------------_______ ✨ FUNCION AUTO-EJECUION ✨ _______------------
 
 //* Setear datos al Local Storage
+/**
+ * Guarda un array al Local Storage
+ *
+ * @param {array} cartList
+ */
 const saveLocalStorage = cartList => {
   localStorage.setItem('cart', JSON.stringify(cartList));
 };
@@ -23,6 +30,7 @@ const init = () => {
 
   //* Display Cards
   renderCards(cart);
+  renderRecommendationCards(randomRecommendation(cart));
 
   //* Shopping Cart TEST 👇
   addToCart('Pan', 4);
@@ -30,6 +38,9 @@ const init = () => {
   addToCart('Queso', 2);
   console.log(cartShop);
   console.log(`Cantidad Total de Productos: ${totalQuantity(cartShop)}`);
+
+  // console.log(randomRecommendation(cart));
+  // randomRecommendation(cart).forEach(el => console.log(el));
 };
 
 init();
@@ -58,6 +69,34 @@ function renderCards(array) {
     </div>`;
 
     cardContainer.insertAdjacentHTML('beforeend', templateCard);
+  }
+}
+
+function renderRecommendationCards(foods) {
+  for (const food of foods) {
+    let templateRecommendation = `
+  <div class="card mb-3 mx-auto card-recomendacion">
+    <div class="row g-0 d-flex align-items-center">
+      <div class="col-md-3 pt-3 pt-md-0">
+        <img
+          src="${food.img}"
+          height="60";
+          class="img-fluid card-recomendacion__img" alt="...">
+      </div>
+      <div class="col-md-6">
+        <div class="card-body">
+          <h5 class="card-title card-recomendacion__title">${food.nombre}</h5>
+          <p class="card-text text-muted mb-1">${food.descripcion}</p>
+          <p class="mb-0 card-recomendacion__price">$${food.precio}</p>
+        </div>
+      </div>
+      <div class="col-md-3 pb-3">
+        <button class="btn btn-primary w-100">Agregar</button>
+      </div>
+    </div>
+  </div>`;
+
+    cardRecomendacion.insertAdjacentHTML('beforeend', templateRecommendation);
   }
 }
 

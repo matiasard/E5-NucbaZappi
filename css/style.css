@@ -97,8 +97,10 @@ body {
   1px 0.2px 7px rgba(0, 0, 0, 0.111),
   1.9px 0.4px 14.4px rgba(0, 0, 0, 0.139),
   4px 0.7px 29.6px rgba(0, 0, 0, 0.172),
-  11px 2px 81px rgba(0, 0, 0, 0.25)
-;  
+  11px 2px 81px rgba(0, 0, 0, 0.25);
+  
+  /* display: flex; */
+  justify-content: center;
 }
 
 .card-recomendacion__title {
@@ -116,6 +118,12 @@ body {
   font-weight: 800;
 }
 
+.card-recomendacion__img { 
+  width: 70px;
+  height: 70px;
+  border-radius: 10px;
+}
+
 /* ----------------------- */
 /* -  CARD CATEGORY        */
 /* ----------------------- */
@@ -123,6 +131,8 @@ body {
   /* min-width: 300px;
   max-width: 315px; */
   /* margin-inline: auto; */
+  /* display: flex; */
+  justify-content: center;
 }
 .category-container img{
   height: 83px;
@@ -202,5 +212,10 @@ body {
   .card-recomendacion {
     min-width: 300px;
     max-width: 315px;
+  }
+
+  .card-recomendacion__img {
+    width: auto; 
+    height: auto;
   }
 }
