@@ -1,5 +1,6 @@
 :root{
   --background_color: #131415;
+  --background_color-transparent: #131415f2;
   --background_color-card: #252525;
   --color_naranja: #FFA400;
   --color_rojo: #FC2933;
@@ -15,9 +16,6 @@
 }
 
 body {
-  /* background-color: rgb(37, 37, 37);
-  color: white; */
-  /* background-color: lemonchiffon; */
   background-color: var(--background_color);
   color: var(--color_letras);
 }
@@ -42,15 +40,30 @@ body {
   border: none;
 }
 
-/* app-element {
-  display: block;
-  background: steelblue;
-  width: 200px;
-  height: 200px;
-} */
+/* ----------------------- */
+/* -  NAVBAR Stile         */
+/* ----------------------- */
+.navbar-container {
+  background-color: var(--background_color-transparent);
+}
+
+.navbar-container ul {
+  column-gap: 50px;
+  row-gap: 15px;
+}
+
+.navbar-container ul li svg {
+  fill: var(--color_naranja);
+}
+
+.navbar-container ul li a {
+  display: flex;
+  align-items: center;
+  column-gap: 10px;
+}
 
 /* ----------------------- */
-/* -  Hero Stile           */
+/* -  HERO Stile           */
 /* ----------------------- */
 .hero__title {
   font-size: 4.4rem;
@@ -82,21 +95,21 @@ body {
 }
 
 @keyframes pizzaAnimation{
-    0% {
-        transform:  translate(0,0);
-    }
-    25% {
-        transform:  translate(0,-20px) rotate(1deg);
-    }
-    50% {
-        transform:  translate(0,-5px);
-    }
-    75% {
-        transform:  translate(0,-15px) rotate(-1deg);
-    }
-    100% {
-        transform:  translate(0,0);
-    }
+  0% {
+      transform:  translate(0,0);
+  }
+  25% {
+      transform:  translate(0,-20px) rotate(1deg);
+  }
+  50% {
+      transform:  translate(0,-5px);
+  }
+  75% {
+      transform:  translate(0,-15px) rotate(-1deg);
+  }
+  100% {
+      transform:  translate(0,0);
+  }
 }
 
 
