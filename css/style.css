@@ -91,6 +91,13 @@ body {
 }
 
 .hero-container__img {
+  display: flex;
+  justify-content: flex-end;
+  align-items: center;
+  --bs-gutter-x: 0rem;
+}
+
+.hero-container__img {
   animation: pizzaAnimation 7s ease-in-out 0s infinite normal none;
 }
 
