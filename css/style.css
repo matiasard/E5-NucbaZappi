@@ -118,12 +118,13 @@ body {
 /* ----------------------- */
 .card-recomendacion-container {
   column-gap: 1px;
+  margin-inline: auto;
 }
 
 .card-recomendacion {
   --bs-card-border-radius: 22px;
-  min-width: 380px;
-  max-width: 390px;
+  min-width: 23.75rem;
+  max-width: 24.375rem;
 
   background-color: var(--background_color-card);
   color: var(--color_letras);
@@ -138,6 +139,12 @@ body {
   justify-content: center;
 }
 
+.card-recomendacion .card-body {
+  --bs-card-spacer-y: 0.5rem;
+  --bs-card-spacer-x: 0.5rem;
+  padding-left: 1rem;
+}
+
 .card-recomendacion__title {
   font-weight: 400;
   font-size: 1rem;;
@@ -145,7 +152,7 @@ body {
 
 .card-recomendacion__price {
   /* letter-spacing: .5px; */
-  font-size: 1.3rem;
+  font-size: 1.1rem;
   display: inline-block;
   background: linear-gradient(90deg, var(--color_naranja) 0%, var(--color_rojo) 100%);
   -webkit-background-clip: text;
@@ -157,6 +164,7 @@ body {
   width: 70px;
   height: 70px;
   border-radius: 10px;
+  object-fit: cover;
 }
 
 /* ----------------------- */
@@ -172,6 +180,7 @@ body {
 .category-container img{
   height: 83px;
   width: 83px;
+  object-fit: cover;
 }
 .card-category__container {
   width: 180px;
@@ -225,19 +234,22 @@ body {
 /* ----------------------- */
 
 .card-container {
-  min-width: 320px;
-  max-width: 340px;
+  min-width: 20rem;
+  max-width: 21.25rem;
   color: var(--color_letras)
 }
 
 .card-container__info {
-  --bs-card-border-radius: 22px;
+  --bs-card-border-radius: 1.375rem;
   background-color: var(--background_color-card);
 }
 
 .card-container__img {
   border-radius: 38px;
   padding: 1rem;
+  /* height: 17vh; */
+  height: 10.313rem;
+  object-fit: cover;
 }
 
 .card-container__btn {
@@ -249,20 +261,31 @@ body {
 /* ----------------------- */
 @media (max-width: 765px) {
   .card-recomendacion {
-    min-width: 300px;
-    max-width: 315px;
+    min-width: 18.75rem;
+    max-width: 19.688rem;
   }
 
   .card-recomendacion__img {
-    width: auto; 
-    height: auto;
+    width: 100%; 
+    /* height: 25vh; */
+    height: 11.563rem;
+    object-fit: cover;
   }
 
   .card-recomendacion__title {
     font-size: 1.5rem;
   }
 
+  .card-recomendacion__price {
+    font-size: 1.3rem;
+  }
+  
   .card-container__info  h5 {
     font-size: 1.5rem;
+  }
+
+  .card-container__img {
+    /* height: 24vh; */
+    height: 11.063rem;
   }
 }
