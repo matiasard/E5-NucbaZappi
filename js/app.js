@@ -9,6 +9,13 @@ import { randomElement } from './util.js';
 let cardContainer = document.querySelector('#card-container');
 let cardRecomendacion = document.querySelector('#card-recomendacion-container');
 
+let cardCategortyContainer = document.querySelectorAll(
+  '.card-category__container'
+);
+let parentCategoryCard = document.querySelector('.category-container');
+let resultCategoryCard = document.createElement('div');
+let previousCategoryValue = '';
+
 //*------------_______ ✨ FUNCION AUTO-EJECUION ✨ _______------------
 
 //* Setear datos al Local Storage
@@ -29,7 +36,7 @@ const init = () => {
   console.log(cart);
 
   //* Display Cards
-  renderCards(randomElement(cart, 9), cardContainer);
+  renderCards(randomElement(cart, 8), cardContainer);
   renderRecommendationCards(randomElement(cart, 3), cardRecomendacion);
   // randomElement2(cart, 3);
 
@@ -68,7 +75,12 @@ function renderCards(foods, contenedorHTML) {
                 <span class="card-container__body-price">$${food.price}</span>
               </div>
               <div class="col-6 col-md-6 d-flex justify-content-end">
-                <button class="btn btn-primary card-container__btn">Agregar</button>
+                <button class="btn btn-primary card-container__btn"
+                data-id="${food.id}"
+                data-name="${food.name}"
+                data-description="${food.description}"
+                data-img="${food.cardImg}"
+                data-price="${food.price}">Agregar</button>
               </div>
             </div>
         </div>
@@ -106,6 +118,47 @@ function renderRecommendationCards(foods, contenedorHTML) {
     contenedorHTML.insertAdjacentHTML('beforeend', templateRecommendation);
   }
 }
+
+//*📝 Funcion para Filtar los Productos por Categoria
+cardCategortyContainer.forEach(function (cardCategory) {
+  cardCategory.addEventListener('click', function () {
+    //* Obtener el valor del atributo "data-category"
+    const category = this.getAttribute('data-category');
+
+    //* Array con los resultados de la categoria seleccionada
+    let categoryResult = productsData.filter(
+      food => food.category === category
+    );
+
+    //* Verifica si existe el elemento con la clase '.category-filter'
+    if (
+      document
+        .querySelector('.food-category')
+        .contains(document.querySelector('.category-filter'))
+    ) {
+      //* Verifica si el elemento seleccionado es el mismo que se selecciono anteriormente
+      if (previousCategoryValue !== category) {
+        document.querySelector('.category-filter').innerHTML = '';
+        previousCategoryValue = category;
+
+        //* Renderiza las Cards con los datos del Array "categoryResult" dentro del elemento "resultCategoryCard"
+        renderCards(categoryResult, resultCategoryCard);
+      }
+    } else {
+      previousCategoryValue = category;
+      resultCategoryCard.classList.add('row');
+      resultCategoryCard.classList.add('row-cols-1');
+      resultCategoryCard.classList.add('row-cols-md-3');
+      resultCategoryCard.classList.add('g-4');
+      resultCategoryCard.classList.add('mt-4');
+      resultCategoryCard.classList.add('category-filter');
+      parentCategoryCard.insertAdjacentElement('afterend', resultCategoryCard);
+
+      //* Renderiza las Cards con los datos del Array "categoryResult" dentro del elemento "resultCategoryCard"
+      renderCards(categoryResult, resultCategoryCard);
+    }
+  });
+});
 
 // Nos devolverá que <app-element> es de tipo HTMLElement
 // const appElement = document.querySelector('app-element');

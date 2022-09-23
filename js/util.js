@@ -36,7 +36,7 @@ function randomElement(arr, randomNumberQuantity) {
       arrCopy.splice(azar, 1);
     } while (max < arrCopy.length);
 
-    //* Devuelve 3 elementos no repetidos
+    //* Devuelve la cantidad especificada (randomNumberQuantity) de elementos no repetidos
     return arrResult;
   } catch (error) {
     alert(error);
