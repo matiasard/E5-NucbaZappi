@@ -55,6 +55,7 @@ init();
 
 //*------------_______ ✨ FUNCIONES ✨ _______------------
 
+//? ******** SECCION - MAS POPULARES - **************************************
 /**
  * Renderizar elementos HTML en base a un array de objetos
  *
@@ -91,6 +92,7 @@ function renderCards(foods, contenedorHTML) {
   }
 }
 
+//? ******** SECCION - RECOMENDACION - *************************************
 function renderRecommendationCards(foods, contenedorHTML) {
   for (const food of foods) {
     let templateRecommendation = `
@@ -119,6 +121,7 @@ function renderRecommendationCards(foods, contenedorHTML) {
   }
 }
 
+//? ******** SECCION - CATEGORIA - ******************************************
 //*📝 Funcion para Filtar los Productos por Categoria
 cardCategortyContainer.forEach(function (cardCategory) {
   cardCategory.addEventListener('click', function () {
@@ -130,14 +133,25 @@ cardCategortyContainer.forEach(function (cardCategory) {
       food => food.category === category
     );
 
+    let isFilterCategoryExists = document
+      .querySelector('.food-category')
+      .contains(document.querySelector('.category-filter'));
+
+    let isDifferentCategory = previousCategoryValue !== category;
+
+    //? ****** START: AGREGAR CLASE ACTIVE ****************
+    let currentCardItem = document.getElementsByClassName(
+      'active__card-category'
+    );
+    // Add and Remove Active Class Category
+    removeActiveCategoryClass(currentCardItem);
+    addActiveCategoryClass(this, currentCardItem);
+    //? ****** END: AGREGAR CLASE ACTIVE ******************
+
     //* Verifica si existe el elemento con la clase '.category-filter'
-    if (
-      document
-        .querySelector('.food-category')
-        .contains(document.querySelector('.category-filter'))
-    ) {
+    if (isFilterCategoryExists) {
       //* Verifica si el elemento seleccionado es el mismo que se selecciono anteriormente
-      if (previousCategoryValue !== category) {
+      if (isDifferentCategory) {
         document.querySelector('.category-filter').innerHTML = '';
         previousCategoryValue = category;
 
@@ -159,6 +173,19 @@ cardCategortyContainer.forEach(function (cardCategory) {
     }
   });
 });
+
+function addActiveCategoryClass(currentContainer, currentElement) {
+  // Card-Container
+  currentContainer.classList.add('active__card-category');
+  // Card-Body
+  currentElement[0]?.children[0].classList.add('active__card-category-body');
+}
+function removeActiveCategoryClass(currentElement) {
+  // Card-Body
+  currentElement[0]?.children[0].classList.remove('active__card-category-body');
+  // Card-Container
+  currentElement[0]?.classList.remove('active__card-category');
+}
 
 // Nos devolverá que <app-element> es de tipo HTMLElement
 // const appElement = document.querySelector('app-element');
