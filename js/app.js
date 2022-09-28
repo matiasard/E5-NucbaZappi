@@ -7,6 +7,8 @@ import { randomElement } from './util.js';
 
 //*------------_______ ✨ DATOS ✨ _______------------
 let products; //botones agregar
+// let products;
+
 let popularProductContainer = document.getElementById(
   'product__popular-container'
 );
@@ -16,7 +18,7 @@ let cardCategortyContainer = document.querySelectorAll(
   '.card-category__container'
 );
 let parentCategoryCard = document.querySelector('.category-container');
-let categoryCardResult = document.createElement('div');
+let categoryCardResultElement = document.createElement('div');
 let previousCategoryValue = '';
 
 //*------------_______ ✨ FUNCION AUTO-EJECUION ✨ _______------------
@@ -39,7 +41,7 @@ const init = () => {
   console.log(`Cantidad Total de Productos: ${totalQuantity(cartShop)}`);
 
   //* Add Event Listener a los Botones "Agregar Carrito" 👇
-  let products = document.querySelectorAll('#products');
+  products = document.getElementsByClassName('products');
   addProducts(products);
 };
 
@@ -68,7 +70,7 @@ function renderCards(foods, contenedorHTML) {
                 <span class="card-container__body-price">$${food.price}</span>
               </div>
               <div class="col-6 col-md-6 d-flex justify-content-end">
-                <button id="products" class="btn btn-primary card-container__btn"
+                <button class="btn btn-primary card-container__btn products"
                   data-id="${food.id}"
                   data-name="${food.name}"
                   data-description="${food.description}"
@@ -104,7 +106,7 @@ function renderRecommendationCards(foods, contenedorHTML) {
         </div>
       </div>
       <div class="col-md-3 pb-3">
-        <button id="products" class="btn btn-primary w-100"
+        <button class="btn btn-primary w-100 products"
           data-id="${food.id}"
           data-name="${food.name}"
           data-description="${food.description}"
@@ -122,19 +124,15 @@ function renderRecommendationCards(foods, contenedorHTML) {
 //*📝 Funcion para Filtar los Productos por Categoria
 cardCategortyContainer.forEach(function (cardCategory) {
   cardCategory.addEventListener('click', function () {
-    //* Obtener el valor del atributo "data-category"
     const category = this.getAttribute('data-category');
-
+    const isDifferentCategory = previousCategoryValue !== category;
     //* Array con los resultados de la categoria seleccionada
     let categoryResult = productsData.filter(
       food => food.category === category
     );
-
     let isFilterCategoryExists = document
       .querySelector('.food-category')
       .contains(document.querySelector('.category-filter'));
-
-    let isDifferentCategory = previousCategoryValue !== category;
 
     //? ****** START: AGREGAR CLASE ACTIVE ****************
     let currentCardItem = document.getElementsByClassName(
@@ -145,32 +143,40 @@ cardCategortyContainer.forEach(function (cardCategory) {
     addActiveCategoryClass(this, currentCardItem);
     //? ****** END: AGREGAR CLASE ACTIVE ******************
 
-    //* Verifica si existe el elemento con la clase '.category-filter'
-    if (isFilterCategoryExists) {
-      //* Verifica si el elemento seleccionado es el mismo que se selecciono anteriormente
-      if (isDifferentCategory) {
-        document.querySelector('.category-filter').innerHTML = '';
-        previousCategoryValue = category;
-
-        //* Renderiza las Cards con los datos del Array "categoryResult" dentro del elemento "categoryCardResult"
-        renderCards(categoryResult, categoryCardResult);
-      }
-    } else {
+    //* Verifica si el elemento seleccionado es el mismo que se selecciono anteriormente
+    if (isDifferentCategory && isFilterCategoryExists) {
+      document.querySelector('.category-filter').innerHTML = '';
       previousCategoryValue = category;
-      categoryCardResult.classList.add('row');
-      categoryCardResult.classList.add('row-cols-1');
-      categoryCardResult.classList.add('row-cols-md-3');
-      categoryCardResult.classList.add('g-4');
-      categoryCardResult.classList.add('mt-4');
-      categoryCardResult.classList.add('category-filter');
-      parentCategoryCard.insertAdjacentElement('afterend', categoryCardResult);
 
-      //* Renderiza las Cards con los datos del Array "categoryResult" dentro del elemento "resultCategoryCard"
-      renderCards(categoryResult, categoryCardResult);
+      //* Renderiza las Cards con los datos del Array "categoryResult"
+      renderCards(categoryResult, categoryCardResultElement);
+
+      //* Remueve los eventos existente a todos los Elementos, para que no se acumule los eventos que se agregaran con la Funcion "addProducts"
+      removeEventListeners(products, 'click', addOneProduct);
+      addProducts(products);
     }
 
-    products = document.querySelectorAll('#products');
-    addProducts(products);
+    //* Verifica si NO existe el elemento con la clase '.category-filter'
+    if (!isFilterCategoryExists) {
+      previousCategoryValue = category;
+      categoryCardResultElement.classList.add('row');
+      categoryCardResultElement.classList.add('row-cols-1');
+      categoryCardResultElement.classList.add('row-cols-md-3');
+      categoryCardResultElement.classList.add('g-4');
+      categoryCardResultElement.classList.add('mt-4');
+      categoryCardResultElement.classList.add('category-filter');
+      parentCategoryCard.insertAdjacentElement(
+        'afterend',
+        categoryCardResultElement
+      );
+
+      //* Renderiza las Cards con los datos del Array "categoryResult"
+      renderCards(categoryResult, categoryCardResultElement);
+
+      //* Remueve los eventos existente a todos los Elementos, para que no se acumule los eventos que se agregaran con la Funcion "addProducts"
+      removeEventListeners(products, 'click', addOneProduct);
+      addProducts(products);
+    }
   });
 });
 
@@ -190,87 +196,23 @@ function removeActiveCategoryClass(currentElement) {
 //? ******** SECCION - COMPRA - ******************************************
 //* 📝 Funcion para agregar los productos al Array del Carrito
 function addProducts(products) {
-  products.forEach(function (btn) {
-    btn.addEventListener('click', function () {
-      let currentProductId = this.getAttribute('data-id');
-      let currentProduct = findProductById(currentProductId);
-      // const product = this.dataset;
-      // console.log(product);
+  Array.from(products).forEach(function (btn) {
+    btn.addEventListener('click', addOneProduct);
+  });
+}
 
-      addToCart(currentProduct, 1);
-    });
+function addOneProduct() {
+  let currentProductId = this.getAttribute('data-id');
+  let currentProduct = findProductById(currentProductId);
+  addToCart(currentProduct, 1);
+}
+
+function removeEventListeners(element, eventType, anyFunction) {
+  Array.from(element).forEach(function (btn) {
+    btn.removeEventListener(eventType, anyFunction);
   });
 }
 
 function findProductById(id) {
   return productsData.find(product => product.id === Number(id));
 }
-
-// Nos devolverá que <app-element> es de tipo HTMLElement
-// const appElement = document.querySelector('app-element');
-// console.log('appElement: ', appElement, appElement.constructor.name);
-
-// class AppElement extends HTMLElement {
-//   constructor() {
-//     super();
-//     console.log('Inicializado...');
-//   }
-// }
-
-// customElements.define('app-element', AppElement);
-// console.log('appElement: ', appElement, appElement.constructor.name);
-
-// const template = document.createElement('template');
-// template.innerHTML = `
-//   <style>
-//     * {
-//       font-size: 200%;
-//     }
-
-//     span {
-//       width: 4rem;
-//       display: inline-block;
-//       text-align: center;
-//     }
-
-//     button {
-//       width: 4rem;
-//       height: 4rem;
-//       border: none;
-//       border-radius: 10px;
-//       background-color: seagreen;
-//       color: white;
-//     }
-//   </style>
-//   <button id="dec">-</button>
-//   <span id="count"></span>
-//   <button id="inc">+</button>`;
-
-// class MyCounter extends HTMLElement {
-//   constructor() {
-//     super();
-//     this.count = 0;
-//     this.attachShadow({ mode: 'open' });
-//   }
-
-//   connectedCallback() {
-//     this.shadowRoot.appendChild(template.content.cloneNode(true));
-//     this.shadowRoot.getElementById('inc').onclick = () => this.inc();
-//     this.shadowRoot.getElementById('dec').onclick = () => this.dec();
-//     this.update(this.count);
-//   }
-
-//   inc() {
-//     this.update(++this.count);
-//   }
-
-//   dec() {
-//     this.update(--this.count);
-//   }
-
-//   update(count) {
-//     this.shadowRoot.getElementById('count').innerHTML = count;
-//   }
-// }
-
-// customElements.define('my-counter', MyCounter);

@@ -16,8 +16,7 @@ const addToCart = (product, quantity = 1) => {
   const item = findShoppingProductById(product.id);
 
   //* 📝 SI el producto ya existe, solo se modifique la "cantidad"
-  // TODO Checkear que sume correctamente los productos
-  if (item !== undefined) item.quantity += 1;
+  if (item !== undefined) item.quantity++;
 
   //* 📝 Si el producto no existe, se agrega al Array
   if (item === undefined) {
