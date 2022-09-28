@@ -1,19 +1,27 @@
 'use strict';
 import { productsData } from '/js/bd.js';
-import { cart as cartShop, addToCart, totalQuantity } from './shoppingCart.js';
+import {
+  cart as cartShop,
+  addToCart,
+  totalQuantity,
+  cart,
+} from './shoppingCart.js';
 import { randomElement } from './util.js';
 
 // console.log(productsData);
 
 //*------------_______ ✨ DATOS ✨ _______------------
-let cardContainer = document.querySelector('#card-container');
+let products; //botones agregar
+let popularProductContainer = document.getElementById(
+  'product__popular-container'
+);
 let cardRecomendacion = document.querySelector('#card-recomendacion-container');
 
 let cardCategortyContainer = document.querySelectorAll(
   '.card-category__container'
 );
 let parentCategoryCard = document.querySelector('.category-container');
-let resultCategoryCard = document.createElement('div');
+let categoryCardResult = document.createElement('div');
 let previousCategoryValue = '';
 
 //*------------_______ ✨ FUNCION AUTO-EJECUION ✨ _______------------
@@ -36,19 +44,16 @@ const init = () => {
   console.log(cart);
 
   //* Display Cards
-  renderCards(randomElement(cart, 8), cardContainer);
+  renderCards(randomElement(cart, 8), popularProductContainer);
   renderRecommendationCards(randomElement(cart, 3), cardRecomendacion);
-  // randomElement2(cart, 3);
 
   //* Shopping Cart TEST 👇
-  addToCart('Pan', 4);
-  addToCart('Carne', 5);
-  addToCart('Queso', 2);
   console.log(cartShop);
   console.log(`Cantidad Total de Productos: ${totalQuantity(cartShop)}`);
 
-  // console.log(randomElement(cart));
-  // randomElement(cart).forEach(el => console.log(el));
+  //* Add Event Listener a los Botones "Agregar Carrito" 👇
+  let products = document.querySelectorAll('#products');
+  addProducts(products);
 };
 
 init();
@@ -76,12 +81,12 @@ function renderCards(foods, contenedorHTML) {
                 <span class="card-container__body-price">$${food.price}</span>
               </div>
               <div class="col-6 col-md-6 d-flex justify-content-end">
-                <button class="btn btn-primary card-container__btn"
-                data-id="${food.id}"
-                data-name="${food.name}"
-                data-description="${food.description}"
-                data-img="${food.cardImg}"
-                data-price="${food.price}">Agregar</button>
+                <button id="products" class="btn btn-primary card-container__btn"
+                  data-id="${food.id}"
+                  data-name="${food.name}"
+                  data-description="${food.description}"
+                  data-img="${food.cardImg}"
+                  data-price="${food.price}">Agregar</button>
               </div>
             </div>
         </div>
@@ -112,7 +117,12 @@ function renderRecommendationCards(foods, contenedorHTML) {
         </div>
       </div>
       <div class="col-md-3 pb-3">
-        <button class="btn btn-primary w-100">Agregar</button>
+        <button id="products" class="btn btn-primary w-100"
+          data-id="${food.id}"
+          data-name="${food.name}"
+          data-description="${food.description}"
+          data-img="${food.cardImg}"
+          data-price="${food.price}">Agregar</button>
       </div>
     </div>
   </div>`;
@@ -155,22 +165,25 @@ cardCategortyContainer.forEach(function (cardCategory) {
         document.querySelector('.category-filter').innerHTML = '';
         previousCategoryValue = category;
 
-        //* Renderiza las Cards con los datos del Array "categoryResult" dentro del elemento "resultCategoryCard"
-        renderCards(categoryResult, resultCategoryCard);
+        //* Renderiza las Cards con los datos del Array "categoryResult" dentro del elemento "categoryCardResult"
+        renderCards(categoryResult, categoryCardResult);
       }
     } else {
       previousCategoryValue = category;
-      resultCategoryCard.classList.add('row');
-      resultCategoryCard.classList.add('row-cols-1');
-      resultCategoryCard.classList.add('row-cols-md-3');
-      resultCategoryCard.classList.add('g-4');
-      resultCategoryCard.classList.add('mt-4');
-      resultCategoryCard.classList.add('category-filter');
-      parentCategoryCard.insertAdjacentElement('afterend', resultCategoryCard);
+      categoryCardResult.classList.add('row');
+      categoryCardResult.classList.add('row-cols-1');
+      categoryCardResult.classList.add('row-cols-md-3');
+      categoryCardResult.classList.add('g-4');
+      categoryCardResult.classList.add('mt-4');
+      categoryCardResult.classList.add('category-filter');
+      parentCategoryCard.insertAdjacentElement('afterend', categoryCardResult);
 
       //* Renderiza las Cards con los datos del Array "categoryResult" dentro del elemento "resultCategoryCard"
-      renderCards(categoryResult, resultCategoryCard);
+      renderCards(categoryResult, categoryCardResult);
     }
+
+    products = document.querySelectorAll('#products');
+    addProducts(products);
   });
 });
 
@@ -185,6 +198,25 @@ function removeActiveCategoryClass(currentElement) {
   currentElement[0]?.children[0].classList.remove('active__card-category-body');
   // Card-Container
   currentElement[0]?.classList.remove('active__card-category');
+}
+
+//? ******** SECCION - COMPRA - ******************************************
+//* 📝 Funcion para agregar los productos al Array del Carrito
+function addProducts(products) {
+  products.forEach(function (btn) {
+    btn.addEventListener('click', function () {
+      let currentProductId = this.getAttribute('data-id');
+      let currentProduct = findProductById(currentProductId);
+      // const product = this.dataset;
+      // console.log(product);
+
+      addToCart(currentProduct, 1);
+    });
+  });
+}
+
+function findProductById(id) {
+  return productsData.find(product => product.id === Number(id));
 }
 
 // Nos devolverá que <app-element> es de tipo HTMLElement

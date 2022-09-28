@@ -14,6 +14,7 @@
     #fc1e37
   );
   --category-background-image: linear-gradient( -45deg, #fe34d8 50%, #47caff 50% );
+  --category-background-image-2: linear-gradient( -45deg, var(--color_naranja) 50%, var(--color_rojo) 50% );
   --category-image-filter: blur(72px);
 }
 
@@ -259,6 +260,7 @@ body {
   height: 170px;
   border-radius: 50%;
   background-image: var(--category-background-image);
+  /* background-image: var(--category-background-image-2);; */
   filter: var(--category-image-filter);
   transform: translate(-5%,0%);
   z-index: -1;

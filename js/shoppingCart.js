@@ -8,9 +8,23 @@ const cart = [];
  * @param {string} product
  * @param {number} quantity
  */
-const addToCart = (product, quantity) => {
-  cart.push({ product, quantity });
-  console.log(`Se agrego ${quantity} ${product} al Carrito`);
+const addToCart = (product, quantity = 1) => {
+  // console.log(`Ya hay un producto igual?: ${isProductExist(product)}`);
+  // console.log(`Ya hay un producto igual?: ${item !== undefined}`);
+  // if (isProductExist(product)) return;
+  // debugger;
+  const item = findShoppingProductById(product.id);
+
+  //* 📝 SI el producto ya existe, solo se modifique la "cantidad"
+  // TODO Checkear que sume correctamente los productos
+  if (item !== undefined) item.quantity += 1;
+
+  //* 📝 Si el producto no existe, se agrega al Array
+  if (item === undefined) {
+    cart.push({ product, quantity });
+    console.log(`Se agrego ${quantity} ${product.name} al Carrito`);
+    console.log(cart);
+  }
 };
 
 /**
@@ -26,6 +40,15 @@ const totalQuantity = arr => {
 
   return total;
 };
+
+// const isProductExist = product => {}
+function isProductExist(product) {
+  return cart.some(element => element?.product.id === product?.id);
+}
+
+function findShoppingProductById(id) {
+  return cart.find(element => element.product.id === Number(id));
+}
 
 // const productos = [
 //   { product: 'carne', quantity: 4 },
