@@ -1,11 +1,6 @@
 'use strict';
-import { productsData } from '/js/bd.js';
-import {
-  cart as cartShop,
-  addToCart,
-  totalQuantity,
-  cart,
-} from './shoppingCart.js';
+import { productsData, saveLocalStorage } from '/js/bd.js';
+import { cart as cartShop, addToCart, totalQuantity } from './shoppingCart.js';
 import { randomElement } from './util.js';
 
 // console.log(productsData);
@@ -26,26 +21,18 @@ let previousCategoryValue = '';
 
 //*------------_______ ✨ FUNCION AUTO-EJECUION ✨ _______------------
 
-//* Setear datos al Local Storage
-/**
- * Guarda un array al Local Storage
- *
- * @param {array} cartList
- */
-const saveLocalStorage = cartList => {
-  localStorage.setItem('cart', JSON.stringify(cartList));
-};
-
 const init = () => {
-  saveLocalStorage(productsData);
+  if (localStorage.getItem('cart') === null) {
+    saveLocalStorage(productsData);
+  }
 
   //* Obtener datos del Local Storage
-  let cart = JSON.parse(localStorage.getItem('cart')) || [];
-  console.log(cart);
+  let productList = JSON.parse(localStorage.getItem('products')) || [];
+  console.log(productList);
 
   //* Display Cards
-  renderCards(randomElement(cart, 8), popularProductContainer);
-  renderRecommendationCards(randomElement(cart, 3), cardRecomendacion);
+  renderCards(randomElement(productList, 8), popularProductContainer);
+  renderRecommendationCards(randomElement(productList, 3), cardRecomendacion);
 
   //* Shopping Cart TEST 👇
   console.log(cartShop);

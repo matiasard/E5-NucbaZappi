@@ -343,3 +343,14 @@ export const productsData = [
     cardImg: './assets/img-foods/bebida-7.jpg',
   },
 ];
+
+//* Setear datos al Local Storage
+/**
+ * Guarda un array al Local Storage
+ *
+ * @param {array} productList
+ */
+export const saveLocalStorage = productList => {
+  // debugger;
+  localStorage.setItem('products', JSON.stringify(productList));
+};
