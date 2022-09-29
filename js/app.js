@@ -159,12 +159,8 @@ cardCategortyContainer.forEach(function (cardCategory) {
     //* Verifica si NO existe el elemento con la clase '.category-filter'
     if (!isFilterCategoryExists) {
       previousCategoryValue = category;
-      categoryCardResultElement.classList.add('row');
-      categoryCardResultElement.classList.add('row-cols-1');
-      categoryCardResultElement.classList.add('row-cols-md-3');
-      categoryCardResultElement.classList.add('g-4');
-      categoryCardResultElement.classList.add('mt-4');
-      categoryCardResultElement.classList.add('category-filter');
+      categoryCardResultElement.className =
+        'row row-cols-1 row-cols-md-3 g-4 mt-4 category-filter';
       parentCategoryCard.insertAdjacentElement(
         'afterend',
         categoryCardResultElement
